@@ -1,0 +1,17 @@
+arrays: 858
+pairs x ops: 3680820
+  agree           all:  3631455   manifest=single version:  3580209
+  false_positive  all:    16767   manifest=single version:    16704
+  false_negative  all:    15723   manifest=single version:    15597
+  undefined       all:    16875   manifest=single version:    16830
+fixed rule disagreements with truth: 0
+minimal examples (class, manifest-is-single-version): op, manifest, component, draft, truth
+  ('false_negative', False): ge [0, 0] vs [0, -3]: draft=False truth=True
+  ('false_negative', True): gt [0, -3] vs [0, -3, 0]: draft=False truth=True
+  ('false_positive', False): lt [0, 0] vs [0, -3]: draft=True truth=False
+  ('false_positive', True): eq [0, -3] vs [0, -3, 0]: draft=True truth=False
+  ('undefined', False): gt [0, 0] vs [0]: draft=None truth=False
+  ('undefined', True): gt [0, -3] vs [0]: draft=None truth=True
+draft Equal [1,2] vs [1,2,0]: 0  Equal [1,2,-2] vs [1,2,0,-2]: 1  Equal [1,2,0,-2] vs [1,2,-2]: -1
+GE [2,0] vs [2,0,-1,1]: 0  GE [2,0,0] vs [2,0,-1,1]: -1  Equal [2,0,0] vs [2,0,0,-1,1]: 0  [2,0,0,-1] vs [2,0,0,-1,1]: 0
+draft [1,2,3] vs [1,2]: None  [2,0,-1,1] vs [2,0,-1]: None

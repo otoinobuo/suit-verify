@@ -1,0 +1,20 @@
+    567  A prefix: a pre-release compares equal to a full version [M,m,p] false_negative
+   1134  A prefix: a pre-release compares equal to a full version [M,m,p] false_positive
+  14346  B encoding: fewer than 3 release integers (1.2-beta vs 1.2.0-beta) false_negative
+  14013  B encoding: fewer than 3 release integers (1.2-beta vs 1.2.0-beta) false_positive
+    810  C number of pre-release identifiers (rc vs rc.1)             false_negative
+   1620  C number of pre-release identifiers (rc vs rc.1)             false_positive
+  16875  D undefined: the component array ends first                  undefined
+
+realistic examples (manifest, component, draft result, SemVer truth):
+  ge [2, 0, 0]          [2, 0, 0, -1, 1]   draft=True  truth=False fixed=False
+  eq [2, 0, 0]          [2, 0, 0, -1, 1]   draft=True  truth=False fixed=False
+  lt [1, 10, 0]         [1, 10, 0, -1, 1]  draft=False truth=True  fixed=True
+  eq [1, 2, -2]         [1, 2, 0, -2]      draft=False truth=True  fixed=True
+  gt [1, 2, -2]         [1, 2, 0, -2]      draft=True  truth=False fixed=False
+  eq [2, 0, 0, -1]      [2, 0, 0, -1, 1]   draft=True  truth=False fixed=False
+  gt [2, 0, 0, -1]      [2, 0, 0, -1, 1]   draft=False truth=True  fixed=True
+  gt [2, 0, 0, -1, 1]   [2, 0, 0, -1]      draft=None  truth=False fixed=False
+  ge [1, 2, 3]          [1, 2]             draft=None  truth=False fixed=False
+  ge [2, 0]             [2, 0, -1, 1]      draft=True  truth=True  fixed=True
+  ge [2, 0, 0]          [2, 0, -1, 1]      draft=False truth=False fixed=False
