@@ -62,6 +62,22 @@ starting with 1"):
 **Not claimed.** This is not a break of any cryptographic mechanism, and no attack on
 a deployed device was tried. Implementations were not tested.
 
+## The encoding proposed on the list (1 Nov 2026 UTC)
+
+[Brendan Moran's message](https://mailarchive.ietf.org/arch/msg/suit/x0npYlbvfSzW9Kj8pln6hugI6MY) keeps the
+comparison rule and changes the encoding: three release integers, then 0 for a final release, or a negative stage,
+its identifiers and the end marker -24.
+
+- `lean/MoranEncoding.lean`: `moran_sound` proves that for complete versions the unchanged rule gives SemVer
+  precedence and is always defined, for any integer values and any number of identifiers. No `sorry`.
+- `model/moran.py`: 1,728 versions and every pair under 5 operators (14,929,920 combinations): 0 disagreements
+  with SemVer and 0 cases where the component ends first. Output: `model/moran_out.txt`.
+
+Short selectors keep the prefix behaviour by design, so `Greater or Equal [1,0]` accepts 1.0.0-alpha and
+`Lesser [1,10]` does not accept 1.10.0-rc. Outside the Section 4.4.1 mapping, a component shorter than the
+manifest (`[2025,12,6]` against `[2025,12]`) still has no defined outcome, and neither does a component still
+reporting the -16 form (`[1,2,3]` against `[1,2,3,0]`).
+
 ## Reproduce
 
     lean lean/Minimal.lean                 # Lean 4.33.1, prints nothing
@@ -70,6 +86,8 @@ a deployed device was tried. Implementations were not tested.
     LEAN_PATH=/tmp lean lean/CrossCheck.lean
     python3 model/suitver.py
     python3 model/breakdown.py
+    lean lean/MoranEncoding.lean           # prints only the axioms line
+    python3 model/moran.py
 
 ## Credits and license
 
