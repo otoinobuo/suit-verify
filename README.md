@@ -2,6 +2,8 @@
 
 A note on version comparison in draft-ietf-suit-update-management-16, Section 4.4.
 
+Summary: https://ba-cybersecurity.com/research/suit-version-comparison/
+
 ## Start here: one case, about a minute, no tools
 
 Section 4.4.1 of the draft gives this encoding:
@@ -91,5 +93,5 @@ reporting the -16 form (`[1,2,3]` against `[1,2,3,0]`).
 
 ## Credits and license
 
-Nobuo Otoi, BA Cybersecurity. The models and proofs were written with an AI coding
+Nobuo Otoi, ba-cybersecurity.com. The models and proofs were written with an AI coding
 assistant. Apache License 2.0.
